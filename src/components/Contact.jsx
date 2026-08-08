@@ -22,6 +22,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: '',
     message: '',
   });
@@ -31,6 +32,16 @@ export default function Contact() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validatePhone = (phone) => {
+    if (!phone || !phone.trim()) return false;
+    // Must contain only +, digits, spaces, and hyphens
+    const validCharsRegex = /^[+\d\s-]+$/;
+    if (!validCharsRegex.test(phone.trim())) return false;
+    // Must contain between 7 and 15 digits
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 7 && digitsOnly.length <= 15;
   };
 
   const handleCopyEmail = () => {
@@ -47,19 +58,29 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
       setStatus({ loading: false, success: false, error: 'Please fill in all required fields.' });
+      return;
+    }
+
+    if (!validatePhone(formData.phone)) {
+      setStatus({
+        loading: false,
+        success: false,
+        error: 'Please enter a valid Phone / WhatsApp number with country code (e.g. +91 9876543210).'
+      });
       return;
     }
 
     setStatus({ loading: true, success: false, error: '' });
 
     try {
-      // 1. Supabase Database Insertion Layer into contact_submissions table
+      // 1. Save submission to Supabase contact_submissions table
       const createdAt = new Date().toISOString();
       const submissionData = {
         name: formData.name,
         email: formData.email,
+        phone: formData.phone,
         subject: formData.subject || 'Portfolio Inquiry',
         message: formData.message,
         created_at: createdAt,
@@ -73,7 +94,7 @@ export default function Contact() {
         throw error;
       }
 
-      // 2. Invoke Supabase Edge Function send-contact-email for Resend email dispatch
+      // 2. Invoke Edge Function to dispatch direct email notification
       try {
         const { data: fnData, error: fnError } = await supabase.functions.invoke('send-contact-email', {
           body: submissionData,
@@ -81,7 +102,7 @@ export default function Contact() {
         if (fnError) {
           console.warn('Edge Function returned error:', fnError);
         } else {
-          console.log('Edge Function dispatch succeeded:', fnData);
+          console.log('Edge Function email dispatch succeeded:', fnData);
         }
       } catch (edgeErr) {
         console.warn('Edge Function call warning:', edgeErr);
@@ -89,7 +110,7 @@ export default function Contact() {
 
       // 3. Successful Submission UI State & Confetti
       setStatus({ loading: false, success: true, error: '' });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
 
       // Trigger celebratory confetti
       confetti({
@@ -270,7 +291,7 @@ export default function Contact() {
                   <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400" />
                   <div>
                     <strong className="font-semibold block text-white text-sm">Message Sent Successfully!</strong>
-                    <span>Thank you for reaching out, Natra Lokesh will get back to you shortly.</span>
+                    <span>Thank you for reaching out, Lokesh Varma will get back to you shortly.</span>
                   </div>
                 </motion.div>
               )}
@@ -317,19 +338,42 @@ export default function Contact() {
 
               </div>
 
-              {/* Subject Input */}
-              <div>
-                <label className="block text-xs font-mono text-slate-400 mb-1.5">
-                  SUBJECT
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="e.g. React Native Project Inquiry"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                {/* Phone / WhatsApp Input */}
+                <div>
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                    PHONE / WHATSAPP NUMBER <span className="text-rose-400">*</span>
+                  </label>
+                  <div className="relative">
+                    <Phone className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-500" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="e.g. +91 98765 43210"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Subject Input */}
+                <div>
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                    SUBJECT
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="e.g. React Native Project Inquiry"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                  />
+                </div>
+
               </div>
 
               {/* Message Textarea */}
