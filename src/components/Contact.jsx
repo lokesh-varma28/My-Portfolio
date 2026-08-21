@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Mail,
   Phone,
@@ -7,7 +7,6 @@ import {
   MapPin,
   Copy,
   Check,
-  Sparkles,
   MessageSquare,
   User,
   CheckCircle2,
@@ -86,7 +85,7 @@ export default function Contact() {
         created_at: createdAt,
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('contact_submissions')
         .insert([submissionData]);
 

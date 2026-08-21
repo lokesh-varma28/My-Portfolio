@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code2, Sparkles, Send, Mail } from 'lucide-react';
+import { Menu, X, Send, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
 
 const NAV_ITEMS = [
@@ -13,14 +13,11 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-
       const sections = NAV_ITEMS.map((item) => item.href.substring(1));
       const current = sections.find((section) => {
         const el = document.getElementById(section);

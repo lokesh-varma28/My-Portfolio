@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo } from 'react';
 
 function MouseSpotlight() {
   const [pos, setPos] = useState({ x: 0, y: 0 });

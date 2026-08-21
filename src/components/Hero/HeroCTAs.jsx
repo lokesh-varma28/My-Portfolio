@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Copy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';

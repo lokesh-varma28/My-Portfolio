@@ -1,14 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import {
   Code,
   Layout,
   Zap,
   ShieldCheck,
   Sparkles,
-  GitBranch,
-  Terminal,
-  Cpu
 } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
@@ -69,7 +64,7 @@ export default function PhilosophyTimeline() {
 
       {/* Timeline Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {PRINCIPLES.map((item, idx) => {
+        {PRINCIPLES.map((item) => {
           const IconComp = item.icon;
           return (
             <SpotlightCard key={item.step} className="p-6 sm:p-8 flex flex-col justify-between">

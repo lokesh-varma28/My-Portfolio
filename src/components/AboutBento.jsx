@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import {
   MapPin,
   Clock,
@@ -7,9 +6,7 @@ import {
   Copy,
   Check,
   Smartphone,
-  Globe,
   Database,
-  Award,
   Zap,
   Code
 } from 'lucide-react';

@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Smartphone,
-  Zap,
-  Layers,
-  ShoppingBag,
-  Shield,
-  Sparkles,
   Wifi,
   Battery,
   Signal,

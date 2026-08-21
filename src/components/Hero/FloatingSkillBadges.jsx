@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { FaReact, FaNodeJs } from 'react-icons/fa6';
 import { SiExpo, SiSupabase } from 'react-icons/si';

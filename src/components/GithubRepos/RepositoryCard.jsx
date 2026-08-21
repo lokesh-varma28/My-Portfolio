@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { motion } from 'framer-motion';
-import { BookOpen, Star, GitFork, Calendar, ArrowUpRight } from 'lucide-react';
+import { memo } from 'react';
+import { BookOpen, Calendar, ArrowUpRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
 import SpotlightCard from '../SpotlightCard';
 

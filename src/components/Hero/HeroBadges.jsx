@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, MapPin } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';

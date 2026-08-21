@@ -1,5 +1,4 @@
-import React from 'react';
-import { ArrowUp, Mail, Heart } from 'lucide-react';
+import { ArrowUp, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
 
 export default function Footer() {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Lenis from 'lenis';
 import Preloader from './components/Preloader';
 import AuroraBackground from './components/AuroraBackground';
@@ -13,8 +13,6 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
-    const [loadingComplete, setLoadingComplete] = useState(false);
-
     useEffect(() => {
         // Initialize Lenis Smooth Scroll
         const lenis = new Lenis({
@@ -38,7 +36,7 @@ export default function App() {
     return (
         <>
             {/* 2026 Animated Preloader */}
-            <Preloader onComplete={() => setLoadingComplete(true)} />
+            <Preloader onComplete={() => {}} />
 
             {/* Main Aurora Background & Content Layer */}
             <AuroraBackground>

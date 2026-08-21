@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ExternalLink,
   Star,
   GitFork,
-  Code2,
   RefreshCw,
   Search,
-  Sparkles,
-  Layers,
   BookOpen,
-  Calendar,
   ArrowUpRight
 } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
@@ -30,56 +25,62 @@ export default function Projects() {
   const { githubConfig } = portfolioData;
   const [repos, setRepos] = useState(githubConfig.initialRepos);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeLanguage, setActiveLanguage] = useState('All');
 
   // GitHub REST API Integration Layer
-  const fetchGithubRepos = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(githubConfig.apiUrl);
-      if (!response.ok) {
-        throw new Error(`GitHub API HTTP status: ${response.status}`);
-      }
-      const data = await response.json();
-      if (Array.isArray(data) && data.length > 0) {
-        // Map GitHub API response data to repository card schema
-        const mappedRepos = data.map((repo) => ({
-          id: repo.id,
-          name: repo.name,
-          title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
-          description: repo.description || 'Public GitHub repository by Natra Lokesh.',
-          html_url: repo.html_url,
-          stargazers_count: repo.stargazers_count,
-          forks_count: repo.forks_count,
-          language: repo.language || 'JavaScript',
-          topics: repo.topics && repo.topics.length > 0 ? repo.topics : ['github-repo', 'project'],
-          updated_at: repo.updated_at,
-        }));
-        setRepos(mappedRepos);
-      }
-    } catch (err) {
-      // Fallback to initialRepos if API rate limited or offline
-      console.warn('GitHub API fetch fallback:', err.message);
-      setError('Showing verified GitHub repositories.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+    
+    const fetchGithubRepos = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(githubConfig.apiUrl);
+        if (!response.ok) {
+          throw new Error(`GitHub API HTTP status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          // Map GitHub API response data to repository card schema
+          const mappedRepos = data.map((repo) => ({
+            id: repo.id,
+            name: repo.name,
+            title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
+            description: repo.description || 'Public GitHub repository by Natra Lokesh.',
+            html_url: repo.html_url,
+            stargazers_count: repo.stargazers_count,
+            forks_count: repo.forks_count,
+            language: repo.language || 'JavaScript',
+            topics: repo.topics && repo.topics.length > 0 ? repo.topics : ['github-repo', 'project'],
+            updated_at: repo.updated_at,
+          }));
+          setRepos(mappedRepos);
+        }
+      } catch (err) {
+        // Fallback to initialRepos if API rate limited or offline
+        console.warn('GitHub API fetch fallback:', err.message);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
     fetchGithubRepos();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [githubConfig.apiUrl]);
+
+  const handleRefresh = useCallback(() => {
+    window.location.reload();
   }, []);
 
   const filteredRepos = repos.filter((repo) => {
     const matchesSearch =
       repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       repo.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLang =
-      activeLanguage === 'All' || repo.language === activeLanguage;
-    return matchesSearch && matchesLang;
+    return matchesSearch;
   });
 
   return (
@@ -122,7 +123,7 @@ export default function Projects() {
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
-              onClick={fetchGithubRepos}
+              onClick={handleRefresh}
               disabled={loading}
               className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-colors"
             >

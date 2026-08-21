@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshCw, Search, ArrowUpRight, BookOpen } from 'lucide-react';
+import { RefreshCw, Search, ArrowUpRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
 import SpotlightCard from '../SpotlightCard';
 import RepositoryCard from './RepositoryCard';
@@ -13,74 +13,74 @@ export default function GithubRepos() {
   const [isSynced, setIsSynced] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
-  const abortControllerRef = useRef(null);
-
-  const fetchGithubRepos = async () => {
-    // Abort any in-flight background request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-    setLoading(true);
-
-    try {
-      const response = await fetch(githubReposData.apiUrl, {
-        signal: controller.signal,
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(`GitHub API status ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (Array.isArray(data) && data.length > 0) {
-        const mapped = data.map((r) => ({
-          id: r.id,
-          name: r.name,
-          displayName: r.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
-          description: r.description || 'Public GitHub repository.',
-          html_url: r.html_url,
-          language: r.language || 'JavaScript',
-          stargazers_count: r.stargazers_count,
-          forks_count: r.forks_count,
-          updated_at: r.updated_at,
-          topics: r.topics || [],
-        }));
-        // Update with live data on background sync success
-        setRepos(mapped);
-        setIsSynced(true);
-      }
-    } catch (err) {
-      if (err.name === 'AbortError') {
-        console.warn('GitHub API background sync timed out or aborted.');
-      } else {
-        console.warn('GitHub API background sync warning:', err);
-      }
-      // Silently keep existing fallback repositories; do not clear state or show error banner
-    } finally {
-      clearTimeout(timeoutId);
-      setLoading(false);
-    }
-  };
 
   // 3. Start background sync after component mounts
   useEffect(() => {
-    fetchGithubRepos();
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
+    let isMounted = true;
+    const abortController = new AbortController();
+    const timeoutId = setTimeout(() => abortController.abort(), 6000);
+
+    const fetchGithubRepos = async () => {
+      setLoading(true);
+
+      try {
+        const response = await fetch(githubReposData.apiUrl, {
+          signal: abortController.signal,
+          headers: {
+            Accept: 'application/vnd.github.v3+json',
+          },
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`GitHub API status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          const mapped = data.map((r) => ({
+            id: r.id,
+            name: r.name,
+            displayName: r.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
+            description: r.description || 'Public GitHub repository.',
+            html_url: r.html_url,
+            language: r.language || 'JavaScript',
+            stargazers_count: r.stargazers_count,
+            forks_count: r.forks_count,
+            updated_at: r.updated_at,
+            topics: r.topics || [],
+          }));
+          // Update with live data on background sync success
+          setRepos(mapped);
+          setIsSynced(true);
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.warn('GitHub API background sync timed out or aborted.');
+        } else {
+          console.warn('GitHub API background sync warning:', err);
+        }
+        // Silently keep existing fallback repositories; do not clear state or show error banner
+      } finally {
+        clearTimeout(timeoutId);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
+
+    fetchGithubRepos();
+    
+    return () => {
+      isMounted = false;
+      abortController.abort();
+    };
+  }, []);
+
+  const handleRefresh = useCallback(() => {
+    window.location.reload();
   }, []);
 
   const languages = ['All', ...new Set(repos.map((r) => r.language).filter(Boolean))];
@@ -141,7 +141,7 @@ export default function GithubRepos() {
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
-              onClick={fetchGithubRepos}
+              onClick={handleRefresh}
               disabled={loading}
               className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-colors disabled:opacity-50"
             >
