@@ -24,7 +24,8 @@ import {
   SiPostman,
   SiPython,
   SiDjango,
-  SiFirebase
+  SiFirebase,
+  SiMysql
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 import SpotlightCard from './SpotlightCard';
@@ -198,6 +199,16 @@ const SKILLS_MATRIX = [
     bg: 'bg-emerald-600/10',
     border: 'border-emerald-600/30',
     desc: 'Document-oriented NoSQL database modeling and data queries.'
+  },
+  {
+    name: 'SQL',
+    category: 'Database',
+    level: 'Proficient',
+    icon: SiMysql,
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/30',
+    desc: 'Relational database queries, joins, indexing, and schema design.'
   },
   {
     name: 'Firebase',
