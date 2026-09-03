@@ -8,7 +8,10 @@ import {
   FaReact,
   FaNodeJs,
   FaGitAlt,
-  FaGithub
+  FaGithub,
+  FaVialCircleCheck,
+  FaRobot,
+  FaFlask
 } from 'react-icons/fa6';
 import {
   SiTypescript,
@@ -18,12 +21,15 @@ import {
   SiExpress,
   SiSupabase,
   SiMongodb,
-  SiPostman
+  SiPostman,
+  SiPython,
+  SiDjango,
+  SiFirebase
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
 import SpotlightCard from './SpotlightCard';
 
-const CATEGORIES = ['All', 'Frontend', 'Mobile', 'Backend', 'Database', 'Tools'];
+const CATEGORIES = ['All', 'Frontend', 'Mobile', 'Backend', 'Database', 'Testing', 'Tools'];
 
 const SKILLS_MATRIX = [
   // Frontend
@@ -141,6 +147,36 @@ const SKILLS_MATRIX = [
     border: 'border-slate-500/30',
     desc: 'RESTful API routing, middleware architecture, and security.'
   },
+  {
+    name: 'Python',
+    category: 'Backend',
+    level: 'Proficient',
+    icon: SiPython,
+    color: 'text-yellow-400',
+    bg: 'bg-yellow-500/10',
+    border: 'border-yellow-500/30',
+    desc: 'Scripting, automation, backend logic, and data processing.'
+  },
+  {
+    name: 'Django',
+    category: 'Backend',
+    level: 'Proficient',
+    icon: SiDjango,
+    color: 'text-green-400',
+    bg: 'bg-green-700/10',
+    border: 'border-green-700/30',
+    desc: 'Full-stack web framework with ORM, admin panel, and auth.'
+  },
+  {
+    name: 'Django REST Framework',
+    category: 'Backend',
+    level: 'Proficient',
+    icon: SiDjango,
+    color: 'text-green-300',
+    bg: 'bg-green-600/10',
+    border: 'border-green-600/30',
+    desc: 'Serializers, ViewSets, and RESTful API design with DRF.'
+  },
 
   // Database
   {
@@ -162,6 +198,58 @@ const SKILLS_MATRIX = [
     bg: 'bg-emerald-600/10',
     border: 'border-emerald-600/30',
     desc: 'Document-oriented NoSQL database modeling and data queries.'
+  },
+  {
+    name: 'Firebase',
+    category: 'Database',
+    level: 'Proficient',
+    icon: SiFirebase,
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/30',
+    desc: 'Google Firebase platform for auth, hosting, and cloud functions.'
+  },
+  {
+    name: 'Firebase Firestore',
+    category: 'Database',
+    level: 'Proficient',
+    icon: SiFirebase,
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/30',
+    desc: 'NoSQL cloud database with real-time sync and offline support.'
+  },
+
+  // Testing
+  {
+    name: 'Playwright',
+    category: 'Testing',
+    level: 'Proficient',
+    icon: FaVialCircleCheck,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/30',
+    desc: 'Cross-browser end-to-end test automation with Playwright.'
+  },
+  {
+    name: 'E2E & API Testing',
+    category: 'Testing',
+    level: 'Proficient',
+    icon: FaFlask,
+    color: 'text-sky-400',
+    bg: 'bg-sky-500/10',
+    border: 'border-sky-500/30',
+    desc: 'End-to-end and API test coverage using structured test flows.'
+  },
+  {
+    name: 'AI-assisted Testing',
+    category: 'Testing',
+    level: 'Proficient',
+    icon: FaRobot,
+    color: 'text-fuchsia-400',
+    bg: 'bg-fuchsia-500/10',
+    border: 'border-fuchsia-500/30',
+    desc: 'AI-assisted test generation, debugging, and automated workflows.'
   },
 
   // Tools
