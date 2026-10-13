@@ -59,9 +59,9 @@ export default function MobileShowcase() {
   const activeScreen = MOBILE_SCREENS[activeScreenIndex];
 
   return (
-    <section id="mobile" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10">
+    <section id="mobile" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
       {/* Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-16">
+      <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16">
         <span className="text-xs font-mono text-purple-400 uppercase tracking-widest px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
           REACT NATIVE & EXPO
         </span>
@@ -73,7 +73,7 @@ export default function MobileShowcase() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
         
         {/* Left Column: Mobile Capability Highlights */}
         <div className="lg:col-span-6 space-y-6">
@@ -141,7 +141,7 @@ export default function MobileShowcase() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative w-[300px] h-[580px] rounded-[48px] bg-slate-950 border-[6px] border-slate-800 shadow-2xl shadow-purple-500/20 p-3 overflow-hidden"
+            className="relative w-[300px] sm:h-[580px] rounded-[48px] bg-slate-950 border-[6px] border-slate-800 shadow-2xl shadow-purple-500/20 p-3 overflow-hidden"
           >
             {/* Phone Notch & Status Bar */}
             <div className="absolute top-0 left-0 right-0 h-6 bg-slate-950 z-30 flex items-center justify-between px-6">
@@ -156,7 +156,7 @@ export default function MobileShowcase() {
             </div>
 
             {/* Phone Screen Container */}
-            <div className="w-full h-full rounded-[38px] bg-[#070b15] border border-slate-800 pt-8 px-4 pb-4 flex flex-col justify-between overflow-hidden relative">
+            <div className="w-full sm:h-full rounded-[38px] bg-[#070b15] border border-slate-800 pt-8 px-4 pb-4 flex flex-col justify-between gap-6 sm:gap-0 overflow-hidden relative">
               
               {/* Dynamic Screen Content */}
               <AnimatePresence mode="wait">

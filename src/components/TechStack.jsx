@@ -28,9 +28,26 @@ import {
   SiMysql
 } from 'react-icons/si';
 import { VscVscode } from 'react-icons/vsc';
+import { FaWandMagicSparkles, FaCube, FaBoltLightning, FaBoxArchive, FaTerminal } from 'react-icons/fa6';
+import {
+  SiThreedotjs,
+  SiCursor,
+  SiWindsurf,
+  SiClaude,
+  SiGooglegemini,
+  SiGithubcopilot,
+  SiCline,
+  SiBruno,
+  SiBootstrap,
+  SiVercel,
+  SiNetlify,
+  SiRender,
+  SiRailway,
+  SiCloudflare
+} from 'react-icons/si';
 import SpotlightCard from './SpotlightCard';
 
-const CATEGORIES = ['All', 'Frontend', 'Mobile', 'Backend', 'Database', 'Testing', 'Tools'];
+const CATEGORIES = ['All', 'Frontend', 'Mobile', 'Backend', 'Database', 'Testing', 'Tools', 'AI Tools'];
 
 const SKILLS_MATRIX = [
   // Frontend
@@ -304,6 +321,242 @@ const SKILLS_MATRIX = [
     border: 'border-orange-600/30',
     desc: 'API endpoint testing, environment variables, and debugging.'
   }
+  ,
+  // Frontend
+  {
+    name: 'Three.js',
+    category: 'Frontend',
+    level: 'Proficient',
+    icon: SiThreedotjs,
+    color: 'text-slate-200',
+    bg: 'bg-slate-700/20',
+    border: 'border-slate-700/40',
+    desc: '3D graphics for the web, scenes, cameras, lighting, and interactive WebGL experiences.'
+  },
+
+  // AI Tools
+  {
+    name: 'Cursor',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiCursor,
+    image: '/tools/cursor.svg',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/30',
+    desc: 'AI-first code editor for fast refactors, multi-file edits, and pair programming.'
+  },
+  {
+    name: 'Kiro',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: FaWandMagicSparkles,
+    image: '/tools/kiro.svg',
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/30',
+    desc: 'Spec-driven AI IDE for planning features and generating structured code.'
+  },
+  {
+    name: 'Antigravity',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: FaCube,
+    image: '/tools/antigravity.svg',
+    color: 'text-sky-400',
+    bg: 'bg-sky-500/10',
+    border: 'border-sky-500/30',
+    desc: 'Agent-first AI IDE for delegating coding tasks and automating workflows.'
+  },
+  {
+    name: 'Windsurf',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiWindsurf,
+    image: '/tools/windsurf.svg',
+    color: 'text-cyan-300',
+    bg: 'bg-cyan-400/10',
+    border: 'border-cyan-400/30',
+    desc: 'Agentic AI IDE for context-aware coding and rapid prototyping.'
+  },
+  {
+    name: 'ChatGPT',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: FaRobot,
+    image: '/tools/chatgpt.svg',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/30',
+    desc: 'Prompt-driven debugging, code generation, and learning new concepts quickly.'
+  },
+  {
+    name: 'Claude',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiClaude,
+    image: '/tools/claude.svg',
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/30',
+    desc: 'Code review, architecture discussions, and long-context problem solving.'
+  },
+  {
+    name: 'Gemini',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiGooglegemini,
+    image: '/tools/gemini.svg',
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/30',
+    desc: 'Multimodal AI for research, code assistance, and content generation.'
+  }
+  ,
+  {
+    name: 'Thunder Client',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: FaBoltLightning,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/30',
+    desc: 'Lightweight REST API client inside VS Code for testing endpoints, collections, and environments.'
+  }
+  ,
+  {
+    name: 'GitHub Copilot',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiGithubcopilot,
+    image: '/tools/githubcopilot.svg',
+    color: 'text-slate-200',
+    bg: 'bg-slate-700/20',
+    border: 'border-slate-700/40',
+    desc: 'AI pair programmer inside the editor for completions, chat, and quick boilerplate.'
+  },
+  {
+    name: 'Cline',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiCline,
+    image: '/tools/cline.svg',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/30',
+    desc: 'Autonomous AI coding agent for VS Code that edits files and runs commands with approval.'
+  }
+  ,
+  {
+    name: 'Bruno',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiBruno,
+    image: '/tools/bruno.svg',
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/30',
+    desc: 'Open-source, offline-first API client for testing endpoints with Git-friendly collections.'
+  },
+  {
+    name: 'Zustand',
+    category: 'Frontend',
+    level: 'Proficient',
+    icon: FaBoxArchive,
+    image: '/tools/zustand.svg',
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/30',
+    desc: 'Minimal, hook-based global state management for React without boilerplate.'
+  },
+  {
+    name: 'Bootstrap',
+    category: 'Frontend',
+    level: 'Proficient',
+    icon: SiBootstrap,
+    image: '/tools/bootstrap.svg',
+    color: 'text-purple-400',
+    bg: 'bg-purple-500/10',
+    border: 'border-purple-500/30',
+    desc: 'Responsive CSS framework for building clean, mobile-first layouts quickly.'
+  },
+  {
+    name: 'Gemini CLI',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiGooglegemini,
+    image: '/tools/geminicli.svg',
+    color: 'text-sky-400',
+    bg: 'bg-sky-500/10',
+    border: 'border-sky-500/30',
+    desc: 'Terminal-based AI agent for coding, debugging, and automating tasks from the command line.'
+  },
+  {
+    name: 'Agy CLI',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: FaTerminal,
+    image: '/tools/agy.svg',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/30',
+    desc: 'Antigravity command-line agent for delegating coding tasks and running workflows from the terminal.'
+  },
+  {
+    name: 'Vercel',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiVercel,
+    image: '/tools/vercel.svg',
+    color: 'text-slate-200',
+    bg: 'bg-slate-700/20',
+    border: 'border-slate-700/40',
+    desc: 'Frontend and serverless deployment with preview builds, environment variables, and edge functions.'
+  },
+  {
+    name: 'Netlify',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiNetlify,
+    image: '/tools/netlify.svg',
+    color: 'text-teal-400',
+    bg: 'bg-teal-500/10',
+    border: 'border-teal-500/30',
+    desc: 'Static site hosting with Git-based deploys, forms, and serverless functions.'
+  },
+  {
+    name: 'Render',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiRender,
+    image: '/tools/render.svg',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/30',
+    desc: 'Cloud platform for hosting web services, APIs, background workers, and databases.'
+  },
+  {
+    name: 'Railway',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiRailway,
+    image: '/tools/railway.svg',
+    color: 'text-violet-300',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/30',
+    desc: 'Instant deployment for backends and databases with simple environment management.'
+  },
+  {
+    name: 'Cloudflare',
+    category: 'Tools',
+    level: 'Proficient',
+    icon: SiCloudflare,
+    image: '/tools/cloudflare.svg',
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/30',
+    desc: 'DNS, CDN, and edge platform for fast, secure delivery with Pages and Workers.'
+  }
 ];
 
 export default function TechStack() {
@@ -314,9 +567,9 @@ export default function TechStack() {
     : SKILLS_MATRIX.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10">
+    <section id="skills" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
       {/* Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
         <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
           TECHNICAL STACK
         </span>
@@ -329,7 +582,7 @@ export default function TechStack() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-12">
         {CATEGORIES.map((category) => {
           const isActive = activeCategory === category;
           return (
@@ -351,7 +604,7 @@ export default function TechStack() {
       {/* Skills Matrix Grid */}
       <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+        className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"
       >
         <AnimatePresence mode="popLayout">
           {filteredSkills.map((skill) => {
@@ -365,29 +618,38 @@ export default function TechStack() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.25 }}
               >
-                <SpotlightCard className="p-5 h-full flex flex-col justify-between group">
+                <SpotlightCard className="p-3.5 sm:p-5 h-full flex flex-col justify-between group">
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-10 h-10 rounded-xl ${skill.bg} ${skill.border} border flex items-center justify-center ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent className="w-5 h-5" />
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${skill.bg} ${skill.border} border flex items-center justify-center ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
+                        {skill.image ? (
+                          <img
+                            src={skill.image}
+                            alt={`${skill.name} logo`}
+                            className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${skill.name === 'Three.js' ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`} />
+                        )}
                       </div>
-                      <span className="flex items-center gap-1 text-[11px] font-mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">
-                        <CheckCircle2 className="w-3 h-3 text-cyan-400" />
+                      <span className="flex items-center gap-1 text-[9px] sm:text-[11px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-800">
+                        <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-400" />
                         {skill.level}
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-white text-base mb-1 group-hover:text-cyan-400 transition-colors">
+                    <h3 className="font-display font-bold text-white text-sm sm:text-base mb-1 group-hover:text-cyan-400 transition-colors truncate sm:whitespace-normal">
                       {skill.name}
                     </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-slate-400 leading-relaxed line-clamp-2 sm:line-clamp-none">
                       {skill.desc}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                  <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-800/80 flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-slate-500">
                     <span>Category</span>
-                    <span className="text-purple-300">{skill.category}</span>
+                    <span className="text-purple-300 truncate ml-1">{skill.category}</span>
                   </div>
                 </SpotlightCard>
               </motion.div>

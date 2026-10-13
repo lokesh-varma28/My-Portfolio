@@ -1,5 +1,6 @@
 import { ArrowUp, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
+import ResumeButton from './ResumeButton';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -22,18 +23,18 @@ export default function Footer() {
               Natra Lokesh
             </h4>
             <p className="text-xs text-slate-400 font-mono">
-              Full Stack Developer & React Native Developer • Peravaram, AP, India
+              Full Stack Developer & React Native Developer <span className="max-sm:hidden">• </span><span className="max-sm:block">Peravaram, AP, India</span>
             </p>
           </div>
         </div>
 
         {/* Center: Social Links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 max-sm:flex-wrap max-sm:justify-center">
           <a
             href="https://github.com/lokesh-varma28"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-400 hover:text-cyan-400 transition-colors p-2"
+            className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="GitHub Profile"
           >
             <FaGithub className="w-4 h-4" />
@@ -42,18 +43,19 @@ export default function Footer() {
             href="https://www.linkedin.com/in/natra-lokesh-493bb63a2"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-400 hover:text-cyan-400 transition-colors p-2"
+            className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="LinkedIn Profile"
           >
             <FaLinkedin className="w-4 h-4" />
           </a>
           <a
             href="mailto:lokeshvarmakshatriya@gmail.com"
-            className="text-slate-400 hover:text-cyan-400 transition-colors p-2"
+            className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="Send Email"
           >
             <Mail className="w-4 h-4" />
           </a>
+          <ResumeButton className="max-sm:w-full max-sm:justify-center" />
         </div>
 
         {/* Right: Back to top button & copyright */}

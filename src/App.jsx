@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 import Preloader from './components/Preloader';
 import AuroraBackground from './components/AuroraBackground';
+import TopFade from './components/TopFade';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero/Hero';
 import AboutBento from './components/AboutBento';
@@ -41,6 +42,7 @@ export default function App() {
             {/* Main Aurora Background & Content Layer */}
             <AuroraBackground>
                 <div className="relative min-h-screen">
+                    <TopFade />
                     <Navbar />
                     <main>
                         <Hero />

@@ -2,6 +2,7 @@ import { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Copy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import ResumeButton from '../ResumeButton';
 import { portfolioData } from '../../data/portfolioData';
 
 function HeroCTAs() {
@@ -63,6 +64,8 @@ function HeroCTAs() {
           </>
         )}
       </button>
+
+      <ResumeButton />
     </motion.div>
   );
 }

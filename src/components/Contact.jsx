@@ -15,7 +15,6 @@ import {
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
 import confetti from 'canvas-confetti';
 import SpotlightCard from './SpotlightCard';
-import { supabase } from '../lib/supabaseClient';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -74,37 +73,23 @@ export default function Contact() {
     setStatus({ loading: true, success: false, error: '' });
 
     try {
-      // 1. Save submission to Supabase contact_submissions table
-      const createdAt = new Date().toISOString();
       const submissionData = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         subject: formData.subject || 'Portfolio Inquiry',
         message: formData.message,
-        created_at: createdAt,
       };
 
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert([submissionData]);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submissionData),
+      });
 
-      if (error) {
-        throw error;
-      }
-
-      // 2. Invoke Edge Function to dispatch direct email notification
-      try {
-        const { data: fnData, error: fnError } = await supabase.functions.invoke('send-contact-email', {
-          body: submissionData,
-        });
-        if (fnError) {
-          console.warn('Edge Function returned error:', fnError);
-        } else {
-          console.log('Edge Function email dispatch succeeded:', fnData);
-        }
-      } catch (edgeErr) {
-        console.warn('Edge Function call warning:', edgeErr);
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({}));
+        throw new Error(body.error || 'Failed to submit form. Please try again.');
       }
 
       // 3. Successful Submission UI State & Confetti
@@ -123,7 +108,7 @@ export default function Contact() {
         setStatus({ loading: false, success: false, error: '' });
       }, 5000);
     } catch (err) {
-      console.error('Supabase submission error:', err);
+      console.error('Contact submission error:', err);
       const isNetworkError =
         err?.message?.includes('Failed to fetch') ||
         err?.message?.includes('TypeError') ||
@@ -143,9 +128,9 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10">
+    <section id="contact" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
       {/* Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-16">
+      <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16">
         <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
           GET IN TOUCH
         </span>
@@ -199,15 +184,15 @@ export default function Contact() {
 
               {/* Email Card with Copy Trigger & Clickable mailto: link */}
               <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between group">
-                <div className="flex items-center gap-3 overflow-hidden">
+                <div className="flex items-center gap-3 overflow-hidden min-w-0 mr-2 sm:mr-0">
                   <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div className="truncate">
+                  <div className="min-w-0 sm:truncate">
                     <span className="text-[10px] font-mono text-slate-400 block">DIRECT EMAIL</span>
                     <a
                       href="mailto:lokeshvarmakshatriya@gmail.com"
-                      className="text-xs font-semibold text-white hover:text-cyan-400 transition-colors truncate block"
+                      className="text-[11px] sm:text-xs font-semibold text-white hover:text-cyan-400 transition-colors break-all sm:break-normal sm:truncate block leading-tight sm:leading-normal"
                     >
                       lokeshvarmakshatriya@gmail.com
                     </a>
@@ -216,7 +201,7 @@ export default function Contact() {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0"
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0 ml-2 sm:ml-0"
                   title="Copy Email"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}

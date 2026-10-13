@@ -95,9 +95,9 @@ export default function GithubRepos() {
   });
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10">
+    <section id="projects" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
       {/* Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
         <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
           GITHUB REPOSITORIES
         </span>
@@ -110,7 +110,7 @@ export default function GithubRepos() {
       </div>
 
       {/* GitHub Profile Sync Glass Banner */}
-      <SpotlightCard className="p-6 mb-10 bg-slate-950/80 border-slate-800">
+      <SpotlightCard className="p-6 mb-6 sm:mb-10 bg-slate-950/80 border-slate-800">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-white shrink-0">
@@ -195,7 +195,7 @@ export default function GithubRepos() {
       {/* Repositories Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnimatePresence>
-          {filteredRepos.map((repo) => (
+          {filteredRepos.filter((r) => r.name.toLowerCase() !== githubReposData.username.toLowerCase()).map((repo) => (
             <motion.div
               key={repo.id || repo.name}
               layout

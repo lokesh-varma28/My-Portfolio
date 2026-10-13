@@ -1,0 +1,247 @@
+/* -------------------------------------------------------------
+ * Theme System: CSS Variables & Light Mode Remappings
+ * ------------------------------------------------------------- */
+
+/* Task 1 & Task 2a: Page background variables and nav surface */
+:root {
+  --page-bg: #030712;
+}
+
+html[data-theme="light"] {
+  --page-bg: #f8fafc;
+  color-scheme: light;
+}
+
+.nav-surface {
+  background-color: color-mix(in srgb, var(--page-bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+/* Task 2b: Light body background, text, and scrollbar */
+html[data-theme="light"] body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Task 2c: Tailwind variable remapping under html[data-theme="light"] */
+html[data-theme="light"] {
+  /* Slate inverted (50<->950, 100<->900, 200<->800, 300<->700, 400<->600, keep 500) */
+  --color-slate-50: oklch(12.9% 0.042 264.695);
+  --color-slate-100: oklch(20.8% 0.042 265.755);
+  --color-slate-200: oklch(27.9% 0.041 260.031);
+  --color-slate-300: oklch(37.2% 0.044 257.287);
+  --color-slate-400: oklch(44.6% 0.043 257.281);
+  --color-slate-500: oklch(55.4% 0.046 257.417);
+  --color-slate-600: oklch(70.4% 0.04 256.788);
+  --color-slate-700: oklch(86.9% 0.022 252.894);
+  --color-slate-800: oklch(92.9% 0.013 255.508);
+  --color-slate-900: oklch(96.8% 0.007 247.896);
+  --color-slate-950: oklch(98.4% 0.003 247.858);
+
+  /* White remap so text-white becomes dark text in light mode */
+  --color-white: #0f172a;
+
+  /* Accent colours used as text: -300 to -700, -400 to -600, leave 500 and below untouched */
+  /* cyan */
+  --color-cyan-300: oklch(52% 0.105 223.128);
+  --color-cyan-400: oklch(60.9% 0.126 221.723);
+
+  /* sky */
+  --color-sky-300: oklch(50% 0.134 242.749);
+  --color-sky-400: oklch(58.8% 0.158 241.966);
+
+  /* blue */
+  --color-blue-300: oklch(48.8% 0.243 264.376);
+  --color-blue-400: oklch(54.6% 0.245 262.881);
+
+  /* violet */
+  --color-violet-300: oklch(49.1% 0.27 292.581);
+  --color-violet-400: oklch(54.1% 0.281 293.009);
+
+  /* purple */
+  --color-purple-300: oklch(49.6% 0.265 301.924);
+  --color-purple-400: oklch(55.8% 0.288 302.321);
+
+  /* fuchsia */
+  --color-fuchsia-300: oklch(51.8% 0.253 323.949);
+  --color-fuchsia-400: oklch(59.1% 0.293 322.896);
+
+  /* emerald */
+  --color-emerald-300: oklch(50.8% 0.118 165.612);
+  --color-emerald-400: oklch(59.6% 0.145 163.225);
+
+  /* teal */
+  --color-teal-300: oklch(51.1% 0.096 186.391);
+  --color-teal-400: oklch(60% 0.118 184.704);
+
+  /* orange */
+  --color-orange-300: oklch(55.3% 0.195 38.402);
+  --color-orange-400: oklch(64.6% 0.222 41.116);
+
+  /* amber */
+  --color-amber-300: oklch(55.5% 0.163 48.998);
+  --color-amber-400: oklch(66.6% 0.179 58.318);
+
+  /* rose */
+  --color-rose-300: oklch(51.4% 0.222 16.935);
+  --color-rose-400: oklch(58.6% 0.253 17.585);
+
+  /* green */
+  --color-green-300: oklch(52.7% 0.154 150.069);
+  --color-green-400: oklch(62.7% 0.194 149.214);
+
+  /* yellow */
+  --color-yellow-300: oklch(55.4% 0.135 66.442);
+  --color-yellow-400: oklch(68.1% 0.162 75.834);
+
+  /* red */
+  --color-red-300: oklch(50.5% 0.213 27.518);
+  --color-red-400: oklch(57.7% 0.245 27.325);
+
+  /* indigo */
+  --color-indigo-300: oklch(45.7% 0.24 277.023);
+  --color-indigo-400: oklch(51.1% 0.262 276.966);
+
+  /* pink */
+  --color-pink-300: oklch(52.5% 0.223 3.958);
+  --color-pink-400: oklch(59.2% 0.249 0.584);
+}
+
+/* Task 2d: Keep white text on gradient/solid-accent buttons in light mode */
+html[data-theme="light"] a[class*="bg-gradient"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] a[class*="bg-gradient"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text) *:not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] button[class*="bg-gradient"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] button[class*="bg-gradient"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text) *:not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] a[class*="bg-linear"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] a[class*="bg-linear"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text) *:not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] button[class*="bg-linear"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text),
+html[data-theme="light"] button[class*="bg-linear"]:not([class*="gradient-text"]):not(.text-transparent):not(.bg-clip-text) *:not(.text-transparent):not(.bg-clip-text) {
+  color: #fff !important;
+}
+
+html[data-theme="light"] .text-transparent {
+  color: transparent;
+}
+
+/* NL Monogram in Navbar, Footer, and Profile: clearly visible on light box with darkened cyan-to-violet gradient stops */
+html[data-theme="light"] div[class*="bg-gradient-to-tr"][class*="p-[1px]"] {
+  background-image: linear-gradient(135deg, #0891b2 0%, #2563eb 50%, #7c3aed 100%) !important;
+}
+
+html[data-theme="light"] div[class*="bg-gradient-to-tr"] > div[class*="bg-[#0"],
+html[data-theme="light"] div[class*="bg-gradient-to-tr"] > span[class*="bg-[#0"] {
+  color: #0891b2 !important;
+}
+
+/* Task 2e: Arbitrary hex classes light-mode overrides */
+html[data-theme="light"] [class*="bg-[#0"] {
+  background-color: var(--page-bg) !important;
+}
+
+html[data-theme="light"] [class*="from-[#0"] {
+  --tw-gradient-from: var(--page-bg) var(--tw-gradient-from-position);
+  --tw-gradient-to: color-mix(in srgb, var(--page-bg) 0%, transparent) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position));
+}
+
+html[data-theme="light"] [class*="via-[#0"] {
+  --tw-gradient-via: var(--page-bg) var(--tw-gradient-via-position);
+}
+
+html[data-theme="light"] [class*="to-[#0"] {
+  --tw-gradient-to: var(--page-bg) var(--tw-gradient-to-position);
+}
+
+/* Task 2f: Aurora background and glow blobs opacity reduction */
+html[data-theme="light"] .animate-aurora-1,
+html[data-theme="light"] .animate-aurora-2,
+html[data-theme="light"] .animate-aurora-3 {
+  opacity: 0.3 !important;
+}
+
+html[data-theme="light"] canvas.pointer-events-none {
+  opacity: 0.25 !important;
+}
+
+html[data-theme="light"] .blur-3xl {
+  opacity: 0.3 !important;
+}
+
+html[data-theme="light"] .bg-grid-pattern {
+  opacity: 0.2 !important;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+}
+
+/* Task 2g: White-filled tool logos inverted in light mode */
+html[data-theme="light"] img[src$="/tools/cursor.svg"],
+html[data-theme="light"] img[src$="/tools/windsurf.svg"],
+html[data-theme="light"] img[src$="/tools/chatgpt.svg"],
+html[data-theme="light"] img[src$="/tools/vercel.svg"],
+html[data-theme="light"] img[src$="/tools/railway.svg"],
+html[data-theme="light"] img[src$="/tools/githubcopilot.svg"],
+html[data-theme="light"] img[src$="/tools/cline.svg"] {
+  filter: invert(1);
+}
+
+/* Task 2h: Hard-coded colours light-mode overrides */
+html[data-theme="light"] div[style*="rgba(15, 23, 42, 0.65)"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="light"] .glass-panel,
+html[data-theme="light"] .glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+html[data-theme="light"] .glass-panel-interactive {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(226, 232, 240, 0.9);
+}
+
+html[data-theme="light"] .glass-panel-interactive:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 8px 30px -4px rgba(6, 182, 212, 0.15);
+}
+
+html[data-theme="light"] .gradient-text-cyan-blue {
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+html[data-theme="light"] .gradient-text-purple-pink {
+  background: linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #0284c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+html[data-theme="light"] .gradient-text-white-cyan {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 50%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

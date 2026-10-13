@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Send, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
+import ThemeToggle from './ThemeToggle';
 
 const NAV_ITEMS = [
   { name: 'About', href: '#about' },
@@ -36,12 +37,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 transition-all duration-300 bg-[#040814]/80 backdrop-blur-md border-b border-slate-800/50 sm:bg-transparent sm:backdrop-blur-none sm:border-b-0">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Brand Monogram */}
         <a
           href="#"
-          className="group flex items-center gap-3 p-1.5 rounded-xl glass-panel-interactive border-slate-800/80 hover:border-cyan-500/50"
+          className="group flex items-center gap-3 p-1.5 rounded-xl glass-panel-interactive border-slate-800/80 hover:border-cyan-500/50 nav-surface"
         >
           <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full bg-[#080d1a] rounded-[7px] flex items-center justify-center font-display font-bold text-sm text-cyan-400">
@@ -59,7 +60,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Navigation Navigation Pill (Linear Style) */}
-        <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full glass-panel border-slate-800/80 shadow-2xl">
+        <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full glass-panel border-slate-800/80 shadow-2xl nav-surface">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (
@@ -86,13 +87,15 @@ export default function Navbar() {
         {/* Right CTA Actions */}
         <div className="hidden md:flex items-center gap-3">
           {/* Work Status Badge */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 font-medium">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 font-medium nav-surface">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             Available
           </div>
+
+          <ThemeToggle />
 
           {/* Contact Button */}
           <a
@@ -112,9 +115,10 @@ export default function Navbar() {
           >
             Contact
           </a>
+          <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl glass-panel text-slate-300 hover:text-white"
+            className="p-2 rounded-xl glass-panel text-slate-300 hover:text-white nav-surface"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

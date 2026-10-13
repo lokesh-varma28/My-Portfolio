@@ -45,6 +45,15 @@ function formatDate(dateString) {
   }
 }
 
+// Acronyms preserved in uppercase in the displayed title only
+const ACRONYMS = ['AI', 'API', 'MERN', 'DRF', 'JWT', 'UI', 'UX', 'CSS', 'HTML', 'JS', 'TS', 'SQL'];
+const ACRONYM_REGEX = new RegExp(`\\b(${ACRONYMS.join('|')})\\b`, 'gi');
+
+function formatTitle(title) {
+  if (!title) return '';
+  return title.replace(/_/g, ' ').replace(ACRONYM_REGEX, (match) => match.toUpperCase());
+}
+
 function RepositoryCard({ repo }) {
   const langConfig =
     LANGUAGE_COLORS[repo.language] || LANGUAGE_COLORS.Default;
@@ -70,7 +79,7 @@ function RepositoryCard({ repo }) {
 
         {/* Repository Name */}
         <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-          {repo.displayName || repo.name}
+          {formatTitle(repo.displayName || repo.name)}
         </h3>
 
         {/* Description */}

@@ -23,19 +23,19 @@ function HeroCodeWindow() {
       className="mt-12 max-w-3xl mx-auto rounded-2xl glass-panel border-slate-800/90 shadow-2xl overflow-hidden text-left"
     >
       {/* IDE Top Window Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#080d1a]/90 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-          <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-          <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-          <span className="ml-2 text-xs font-mono text-slate-400 flex items-center gap-1.5">
-            <Code2 className="w-3.5 h-3.5 text-cyan-400" />
-            {codeSnippet.filename}
+      <div className="flex items-center justify-between px-4 py-3 bg-[#080d1a]/90 border-b border-slate-800 gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-3 h-3 rounded-full bg-rose-500/80 shrink-0" />
+          <div className="w-3 h-3 rounded-full bg-amber-500/80 shrink-0" />
+          <div className="w-3 h-3 rounded-full bg-emerald-500/80 shrink-0" />
+          <span className="ml-2 text-xs font-mono text-slate-400 flex items-center gap-1.5 min-w-0">
+            <Code2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+            <span className="truncate">{codeSnippet.filename}</span>
           </span>
         </div>
 
         {/* Tab & Copy Action */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setActiveTab('config')}
             className={`px-3 py-1 rounded-md text-xs font-mono transition-colors ${

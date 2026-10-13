@@ -40,8 +40,8 @@ function AnimatedHeading() {
       </h1>
 
       {/* Dynamic GSAP Animated Sub-Headline Carousel */}
-      <div className="mt-4 h-10 sm:h-12 flex items-center justify-center lg:justify-start overflow-hidden">
-        <span className="text-xs font-mono uppercase tracking-widest text-slate-500 mr-2">
+      <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-1.5 sm:gap-0 sm:h-12 overflow-hidden">
+        <span className="text-xs font-mono uppercase tracking-widest text-slate-500 sm:mr-2">
           SPECIALIZING IN
         </span>
         <div ref={headingRef} className="inline-block">
