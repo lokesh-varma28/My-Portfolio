@@ -128,7 +128,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
+    <section id="contact" className="py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-24 sm:scroll-mt-28">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-16">
         <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
@@ -142,12 +142,12 @@ export default function Contact() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         
         {/* Left Column: Direct Contact Details & Quick Copy */}
         <div className="lg:col-span-5 space-y-6">
           
-          <SpotlightCard className="p-6">
+          <SpotlightCard className="p-4 sm:p-6">
             <h3 className="font-display text-lg font-bold text-white mb-2">
               Contact Information
             </h3>
@@ -158,13 +158,13 @@ export default function Contact() {
             <div className="space-y-4">
               
               {/* Phone Card with Clickable tel: link */}
-              <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between group">
-                <div className="flex items-center gap-3 overflow-hidden">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between group">
+                <div className="flex items-center gap-3 overflow-hidden min-w-0 mr-2 sm:mr-0">
                   <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <div className="truncate">
-                    <span className="text-[10px] font-mono text-slate-400 block">PHONE / WHATSAPP</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10px] font-mono text-slate-400 block truncate">PHONE / WHATSAPP</span>
                     <a
                       href="tel:+917036189451"
                       className="text-xs font-semibold text-white hover:text-emerald-400 transition-colors truncate block"
@@ -183,13 +183,13 @@ export default function Contact() {
               </div>
 
               {/* Email Card with Copy Trigger & Clickable mailto: link */}
-              <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between group">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between group">
                 <div className="flex items-center gap-3 overflow-hidden min-w-0 mr-2 sm:mr-0">
                   <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div className="min-w-0 sm:truncate">
-                    <span className="text-[10px] font-mono text-slate-400 block">DIRECT EMAIL</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10px] font-mono text-slate-400 block truncate">DIRECT EMAIL</span>
                     <a
                       href="mailto:lokeshvarmakshatriya@gmail.com"
                       className="text-[11px] sm:text-xs font-semibold text-white hover:text-cyan-400 transition-colors break-all sm:break-normal sm:truncate block leading-tight sm:leading-normal"
@@ -209,13 +209,13 @@ export default function Contact() {
               </div>
 
               {/* Location Badge */}
-              <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <span className="text-[10px] font-mono text-slate-400 block">LOCATION</span>
-                  <span className="text-xs font-semibold text-white">
+                  <span className="text-xs font-semibold text-white block truncate sm:whitespace-normal">
                     Peravaram, Andhra Pradesh, India 🇮🇳
                   </span>
                 </div>
@@ -225,18 +225,18 @@ export default function Contact() {
           </SpotlightCard>
 
           {/* Social Links Matrix */}
-          <SpotlightCard className="p-6">
+          <SpotlightCard className="p-4 sm:p-6">
             <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">
               CONNECT ON SOCIAL PLATFORMS
             </h4>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href="https://github.com/lokesh-varma28"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 hover:bg-slate-800/80 flex items-center gap-3 text-xs font-medium text-slate-200 hover:text-white transition-all group"
+                className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 hover:bg-slate-800/80 flex items-center gap-3 text-xs font-medium text-slate-200 hover:text-white transition-all group min-h-[44px]"
               >
-                <FaGithub className="w-5 h-5 text-slate-400 group-hover:text-cyan-400 transition-colors" />
+                <FaGithub className="w-5 h-5 text-slate-400 group-hover:text-cyan-400 transition-colors shrink-0" />
                 <span>GitHub Profile</span>
               </a>
 
@@ -244,9 +244,9 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/natra-lokesh-493bb63a2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 hover:bg-slate-800/80 flex items-center gap-3 text-xs font-medium text-slate-200 hover:text-white transition-all group"
+                className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 hover:bg-slate-800/80 flex items-center gap-3 text-xs font-medium text-slate-200 hover:text-white transition-all group min-h-[44px]"
               >
-                <FaLinkedin className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                <FaLinkedin className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors shrink-0" />
                 <span>LinkedIn</span>
               </a>
             </div>
@@ -256,12 +256,12 @@ export default function Contact() {
 
         {/* Right Column: Glassmorphism Contact Form */}
         <div className="lg:col-span-7">
-          <SpotlightCard className="p-6 sm:p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
+          <SpotlightCard className="p-4 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               
               {status.error && (
-                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0" />
+                <div className="p-3 sm:p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                   <span>{status.error}</span>
                 </div>
               )}
@@ -270,9 +270,9 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-3"
+                  className="p-3.5 sm:p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-start gap-3"
                 >
-                  <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400" />
+                  <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400 mt-0.5" />
                   <div>
                     <strong className="font-semibold block text-white text-sm">Message Sent Successfully!</strong>
                     <span>Thank you for reaching out, Lokesh Varma will get back to you shortly.</span>
@@ -295,7 +295,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Alex Johnson"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                      className="w-full pl-10 pr-4 py-3 sm:py-2.5 min-h-[44px] sm:min-h-0 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm sm:text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                       required
                     />
                   </div>
@@ -314,7 +314,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="alex@company.com"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                      className="w-full pl-10 pr-4 py-3 sm:py-2.5 min-h-[44px] sm:min-h-0 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm sm:text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                       required
                     />
                   </div>
@@ -337,7 +337,7 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="e.g. +91 98765 43210"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                      className="w-full pl-10 pr-4 py-3 sm:py-2.5 min-h-[44px] sm:min-h-0 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm sm:text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                       required
                     />
                   </div>
@@ -354,7 +354,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="e.g. React Native Project Inquiry"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+                    className="w-full px-4 py-3 sm:py-2.5 min-h-[44px] sm:min-h-0 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm sm:text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                   />
                 </div>
 
@@ -373,7 +373,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project details or job role..."
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none"
+                    className="w-full pl-10 pr-4 py-3 sm:py-2.5 min-h-[110px] sm:min-h-0 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm sm:text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none"
                     required
                   ></textarea>
                 </div>
@@ -383,7 +383,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.loading}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-display font-semibold text-xs shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3.5 min-h-[44px] rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-display font-semibold text-sm sm:text-xs shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {status.loading ? (
                   <span>Sending Message...</span>
