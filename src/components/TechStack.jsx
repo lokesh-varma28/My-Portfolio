@@ -411,8 +411,19 @@ const SKILLS_MATRIX = [
     bg: 'bg-blue-500/10',
     border: 'border-blue-500/30',
     desc: 'Multimodal AI for research, code assistance, and content generation.'
-  }
-  ,
+  },
+  {
+    name: 'Grok AI',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: FaRobot,
+    image: '/tools/grok.svg',
+    url: 'https://grok.com/',
+    color: 'text-slate-100',
+    bg: 'bg-slate-800/40',
+    border: 'border-slate-700/60',
+    desc: 'Real-time reasoning, deep technical analysis, and code generation powered by Grok by xAI.'
+  },
   {
     name: 'Thunder Client',
     category: 'Tools',
@@ -621,18 +632,39 @@ export default function TechStack() {
                 <SpotlightCard className="p-3.5 sm:p-5 h-full flex flex-col justify-between group">
                   <div>
                     <div className="flex items-center justify-between mb-3 sm:mb-4">
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${skill.bg} ${skill.border} border flex items-center justify-center ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
-                        {skill.image ? (
-                          <img
-                            src={skill.image}
-                            alt={`${skill.name} logo`}
-                            className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${skill.name === 'Three.js' ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`} />
-                        )}
-                      </div>
+                      {skill.url ? (
+                        <a
+                          href={skill.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${skill.name} website`}
+                          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${skill.bg} ${skill.border} border flex items-center justify-center ${skill.color} group-hover:scale-110 transition-transform duration-300 hover:border-cyan-400`}
+                        >
+                          {skill.image ? (
+                            <img
+                              src={skill.image}
+                              alt={`${skill.name} logo`}
+                              className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
+                              loading="lazy"
+                            />
+                          ) : (
+                            <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${skill.name === 'Three.js' ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`} />
+                          )}
+                        </a>
+                      ) : (
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${skill.bg} ${skill.border} border flex items-center justify-center ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
+                          {skill.image ? (
+                            <img
+                              src={skill.image}
+                              alt={`${skill.name} logo`}
+                              className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
+                              loading="lazy"
+                            />
+                          ) : (
+                            <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${skill.name === 'Three.js' ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`} />
+                          )}
+                        </div>
+                      )}
                       <span className="flex items-center gap-1 text-[9px] sm:text-[11px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-800">
                         <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-400" />
                         {skill.level}

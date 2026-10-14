@@ -105,7 +105,7 @@ export default function GithubRepos() {
           GitHub <span className="gradient-text-cyan-blue">Repositories</span>
         </h2>
         <p className="text-slate-400 text-sm sm:text-base mt-3">
-          Explore Natra Lokesh's code repositories and open-source contributions.
+          Explore Natra Lokesh&apos;s public GitHub repositories, open-source codebases, and full-stack development projects.
         </p>
       </div>
 

@@ -65,13 +65,13 @@ export default function AboutBento() {
               <Code className="w-5 h-5" />
             </div>
             <h3 className="font-display text-xl font-bold text-white mb-3">
-              Full Stack & Mobile Engineer
+              Full Stack &amp; React Developer
             </h3>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              I specialize in end-to-end software development, delivering high-speed web apps with React 19 and Tailwind CSS alongside native-feel mobile applications with React Native and Expo.
+              I am Natra Lokesh, a full-stack developer and coder delivering high-speed web apps with React 19 alongside cross-platform mobile apps with React Native and Expo.
             </p>
             <p className="text-slate-400 text-sm leading-relaxed">
-              My engineering stack covers modern state management, RESTful APIs with Node.js & Express, cloud databases like Supabase & MongoDB, and smooth UI motion with Framer Motion & GSAP.
+              My engineering stack spans modern JavaScript/TypeScript, scalable backend APIs with Python, Django REST Framework, and Node.js &amp; Express, with cloud databases like MongoDB and Supabase.
             </p>
           </div>
 
@@ -173,8 +173,8 @@ export default function AboutBento() {
                 $ <span className="text-white font-semibold">npx natralokesh</span>
               </p>
               <div className="pt-2 text-slate-400 border-t border-slate-800/60 leading-relaxed">
-                <p>✔ Fetching Natra Lokesh developer profile...</p>
-                <p className="text-emerald-400">✔ Full Stack Developer & React Native Developer</p>
+                <p>✔ Fetching Natra Lokesh developer card...</p>
+                <p className="text-emerald-400">✔ Full-Stack &amp; React Developer</p>
                 <p className="text-purple-300">✔ GitHub: github.com/lokesh-varma28</p>
                 <p className="text-cyan-300">✔ Contact: lokeshvarmakshatriya@gmail.com</p>
               </div>
@@ -182,7 +182,7 @@ export default function AboutBento() {
           </div>
 
           <div className="mt-4 text-[11px] font-mono text-slate-500 text-right">
-            Node.js & NPM Ecosystem Compatible
+            Node.js &amp; Python Ecosystems
           </div>
         </SpotlightCard>
 
@@ -195,24 +195,24 @@ export default function AboutBento() {
               </div>
               <div>
                 <h3 className="font-display text-lg font-bold text-white">
-                  Backend & Cloud Infrastructure
+                  Backend &amp; API Engineering
                 </h3>
-                <p className="text-xs text-slate-400 font-mono">Node.js • Express • MongoDB • Supabase</p>
+                <p className="text-xs text-slate-400 font-mono">Python • Django REST • Node.js • Express • MongoDB</p>
               </div>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Designing scalable RESTful APIs, securing authentication flows, and building real-time databases using Supabase and MongoDB to power modern frontend and mobile clients.
+              Designing scalable RESTful APIs with Python (Django REST Framework) and Node.js &amp; Express, securing authentication flows, and building real-time databases using MongoDB and Supabase.
             </p>
           </div>
 
           <div className="mt-6 grid grid-cols-3 gap-2 text-center font-mono">
             <div className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
-              <div className="text-xs text-cyan-400 font-bold">Node / Express</div>
-              <div className="text-[10px] text-slate-400 mt-0.5">REST APIs</div>
+              <div className="text-xs text-cyan-400 font-bold">Django REST</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Python APIs</div>
             </div>
             <div className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
-              <div className="text-xs text-emerald-400 font-bold">Supabase</div>
-              <div className="text-[10px] text-slate-400 mt-0.5">PostgreSQL & Auth</div>
+              <div className="text-xs text-emerald-400 font-bold">Node / Express</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">REST Services</div>
             </div>
             <div className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
               <div className="text-xs text-purple-400 font-bold">MongoDB</div>

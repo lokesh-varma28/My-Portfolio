@@ -3,8 +3,8 @@ export const portfolioData = {
     name: "Natra Lokesh",
     shortName: "Lokesh",
     monogram: "NL",
-    role: "Full Stack Developer & React Native Developer",
-    secondaryRole: "React 19 & Expo Mobile Architect",
+    role: "Full-Stack Developer & React Specialist",
+    secondaryRole: "React, Python & Expo Mobile Architect",
     location: {
       city: "Peravaram",
       state: "Andhra Pradesh",
@@ -36,18 +36,18 @@ export const portfolioData = {
   hero: {
     badge: "Full Stack Developer & React Native Specialist",
     headline: {
-      prefix: "Building Digital Products with",
-      highlight: "Modern Elegance",
-      suffix: "& Scale.",
+      prefix: "Natra",
+      highlight: "Lokesh",
+      suffix: "",
     },
     animatedHeadlines: [
-      "Full Stack Web Applications",
-      "Cross-Platform Expo Mobile Apps",
-      "Scalable Node & Supabase Backends",
-      "Interactive 60FPS Glass UI",
+      "Full-Stack Web Applications",
+      "React & React Native Apps",
+      "Python & Django REST APIs",
+      "Scalable Node & MongoDB Backends",
     ],
     subheadline:
-      "Hi, I'm Natra Lokesh. I engineer high-performance web applications and seamless mobile apps using React 19, React Native, Expo, Node.js, and Supabase.",
+      "Hi, I'm Natra Lokesh. I'm a Full-Stack Developer and React Native Developer specializing in React, React Native, Python, Django REST Framework, Node.js, and building modern web and cross-platform mobile applications.",
     cta: {
       primary: {
         text: "Explore Repositories",
@@ -63,7 +63,7 @@ export const portfolioData = {
       },
     },
     stats: [
-      { label: "Core Stack", value: "React 19 & Expo" },
+      { label: "Core Stack", value: "React 19 & Python" },
       { label: "Experience", value: "Full Stack & Mobile" },
       { label: "Location", value: "Andhra Pradesh, IN" },
       { label: "Status", value: "Ready to Ship" },
@@ -73,10 +73,10 @@ export const portfolioData = {
       language: "typescript",
       content: `const developer = {
   name: "Natra Lokesh",
-  roles: ["Full Stack Developer", "React Native Developer"],
+  roles: ["Full-Stack Developer", "React Developer", "Python Developer"],
   location: "Peravaram, Andhra Pradesh, India",
-  primaryTech: ["React 19", "React Native", "Expo", "Node.js", "Supabase"],
-  focus: "Creating high performance, accessible web & native apps",
+  primaryTech: ["React 19", "React Native", "Python", "Django REST", "Node.js", "MongoDB"],
+  github: "https://github.com/lokesh-varma28",
   status: "Available for hire"
 };
 
@@ -101,6 +101,8 @@ export default developer;`,
     backend: [
       { name: "Node.js", level: "Proficient" },
       { name: "Express.js", level: "Proficient" },
+      { name: "Python", level: "Proficient" },
+      { name: "Django REST Framework", level: "Proficient" },
     ],
     database: [
       { name: "Supabase", level: "Proficient" },

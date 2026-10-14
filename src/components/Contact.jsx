@@ -275,7 +275,7 @@ export default function Contact() {
                   <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400 mt-0.5" />
                   <div>
                     <strong className="font-semibold block text-white text-sm">Message Sent Successfully!</strong>
-                    <span>Thank you for reaching out, Lokesh Varma will get back to you shortly.</span>
+                    <span>Thank you for reaching out, Natra Lokesh will get back to you shortly.</span>
                   </div>
                 </motion.div>
               )}
