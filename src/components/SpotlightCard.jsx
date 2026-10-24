@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 
-export default function SpotlightCard({
+function SpotlightCard({
   children,
   className = "",
   spotlightColor = "rgba(6, 182, 212, 0.15)",
@@ -8,16 +8,13 @@ export default function SpotlightCard({
   hoverBorderColor = "rgba(56, 189, 248, 0.3)",
 }) {
   const cardRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    cardRef.current.style.setProperty('--spotlight-x', `${e.clientX - rect.left}px`);
+    cardRef.current.style.setProperty('--spotlight-y', `${e.clientY - rect.top}px`);
   };
 
   const handleMouseEnter = () => setOpacity(1);
@@ -42,7 +39,7 @@ export default function SpotlightCard({
         className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+          background: `radial-gradient(600px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), ${spotlightColor}, transparent 40%)`,
         }}
       />
       
@@ -51,7 +48,7 @@ export default function SpotlightCard({
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300"
         style={{
           opacity,
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(56, 189, 248, 0.4), transparent 40%)`,
+          background: `radial-gradient(400px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px), rgba(56, 189, 248, 0.4), transparent 40%)`,
           maskImage: "linear-gradient(black, black) content-box, linear-gradient(black, black)",
           WebkitMaskImage: "linear-gradient(black, black) content-box, linear-gradient(black, black)",
           maskComposite: "exclude",
@@ -64,3 +61,5 @@ export default function SpotlightCard({
     </div>
   );
 }
+
+export default memo(SpotlightCard);

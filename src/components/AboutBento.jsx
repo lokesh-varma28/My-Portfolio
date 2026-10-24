@@ -97,9 +97,9 @@ export default function AboutBento() {
             <div className="flex items-start gap-3 my-2">
               <MapPin className="w-5 h-5 text-cyan-400 shrink-0 mt-1" />
               <div>
-                <h4 className="font-display font-bold text-white text-base">
+                <h3 className="font-display font-bold text-white text-base">
                   Peravaram
-                </h4>
+                </h3>
                 <p className="text-xs text-slate-400">
                   Andhra Pradesh, India 🇮🇳
                 </p>
@@ -151,6 +151,7 @@ export default function AboutBento() {
               </div>
               <button
                 onClick={copyNpxCommand}
+                aria-label="Copy npx natralokesh command to clipboard"
                 className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono transition-colors"
               >
                 {copiedTerminal ? (

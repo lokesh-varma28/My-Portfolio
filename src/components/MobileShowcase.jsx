@@ -112,9 +112,9 @@ export default function MobileShowcase() {
                   }`}
                 >
                   <div>
-                    <h4 className={`font-display text-sm font-bold ${isActive ? 'text-purple-300' : 'text-white'}`}>
+                    <span className={`block font-display text-sm font-bold ${isActive ? 'text-purple-300' : 'text-white'}`}>
                       {screen.title}
-                    </h4>
+                    </span>
                     <p className="text-xs text-slate-400 font-mono mt-0.5">
                       {screen.subtitle}
                     </p>

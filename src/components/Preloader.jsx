@@ -13,13 +13,13 @@ export default function Preloader({ onComplete }) {
           setTimeout(() => {
             setIsLoading(false);
             if (onComplete) onComplete();
-          }, 400);
+          }, 80);
           return 100;
         }
-        const diff = Math.floor(Math.random() * 15) + 5;
+        const diff = Math.floor(Math.random() * 20) + 15;
         return Math.min(prev + diff, 100);
       });
-    }, 100);
+    }, 25);
 
     return () => clearInterval(timer);
   }, [onComplete]);
@@ -29,7 +29,7 @@ export default function Preloader({ onComplete }) {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
+          exit={{ opacity: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030712] text-white"
         >
           {/* Subtle aurora glow center */}
@@ -40,7 +40,7 @@ export default function Preloader({ onComplete }) {
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="w-16 h-16 mb-8 rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 p-[1px] shadow-2xl shadow-cyan-500/20"
             >
               <div className="w-full h-full bg-[#070b14] rounded-2xl flex items-center justify-center font-display font-extrabold text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
@@ -48,15 +48,15 @@ export default function Preloader({ onComplete }) {
               </div>
             </motion.div>
 
-            {/* Name & Role */}
-            <motion.h2
+            {/* Name & Role (Rendered as styled paragraph to preserve strict semantic heading hierarchy) */}
+            <motion.p
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.1 }}
               className="font-display text-xl font-bold tracking-tight text-white mb-1"
             >
               Natra Lokesh
-            </motion.h2>
+            </motion.p>
             <p className="text-xs text-slate-400 font-mono tracking-wider uppercase mb-8">
               Full Stack & Mobile Engineer
             </p>

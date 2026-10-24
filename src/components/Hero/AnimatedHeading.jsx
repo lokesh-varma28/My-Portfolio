@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState, memo } from 'react';
-import gsap from 'gsap';
+import { useEffect, useState, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../../data/portfolioData';
 
 function AnimatedHeading() {
-  const headingRef = useRef(null);
   const [index, setIndex] = useState(0);
-
   const headlines = portfolioData.hero.animatedHeadlines;
 
   useEffect(() => {
@@ -14,19 +12,6 @@ function AnimatedHeading() {
     }, 3000);
     return () => clearInterval(timer);
   }, [headlines.length]);
-
-  useEffect(() => {
-    if (headingRef.current) {
-      const ctx = gsap.context(() => {
-        gsap.fromTo(
-          headingRef.current,
-          { opacity: 0, y: 15, filter: 'blur(8px)' },
-          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'power3.out' }
-        );
-      });
-      return () => ctx.revert();
-    }
-  }, [index]);
 
   return (
     <div className="flex flex-col items-center lg:items-start justify-center text-center lg:text-left">
@@ -39,16 +24,25 @@ function AnimatedHeading() {
         {portfolioData.hero.headline.suffix}
       </h1>
 
-      {/* Dynamic GSAP Animated Sub-Headline Carousel */}
+      {/* Dynamic Animated Sub-Headline Carousel */}
       <div className="mt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-1.5 sm:gap-0 sm:h-12 overflow-hidden">
         <span className="text-xs font-mono uppercase tracking-widest text-slate-500 sm:mr-2">
           SPECIALIZING IN
         </span>
-        <div ref={headingRef} className="inline-block">
-          <span className="px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-display font-semibold text-xs sm:text-sm shadow-lg shadow-cyan-500/10">
-            {headlines[index]}
-          </span>
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -14, filter: 'blur(6px)' }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-block"
+          >
+            <span className="px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-display font-semibold text-xs sm:text-sm shadow-lg shadow-cyan-500/10">
+              {headlines[index]}
+            </span>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

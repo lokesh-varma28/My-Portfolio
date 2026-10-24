@@ -19,9 +19,9 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="font-display font-bold text-sm text-white">
+            <p className="font-display font-bold text-sm text-white">
               Natra Lokesh
-            </h4>
+            </p>
             <p className="text-xs text-slate-400 font-mono">
               Full Stack Developer & React Native Developer <span className="max-sm:hidden">• </span><span className="max-sm:block">Peravaram, AP, India</span>
             </p>
@@ -36,6 +36,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="GitHub Profile"
+            aria-label="GitHub Profile"
           >
             <FaGithub className="w-4 h-4" />
           </a>
@@ -45,6 +46,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="LinkedIn Profile"
+            aria-label="LinkedIn Profile"
           >
             <FaLinkedin className="w-4 h-4" />
           </a>
@@ -52,6 +54,7 @@ export default function Footer() {
             href="mailto:lokeshvarmakshatriya@gmail.com"
             className="text-slate-400 hover:text-cyan-400 transition-colors p-2 max-sm:inline-flex max-sm:items-center max-sm:justify-center max-sm:min-h-11 max-sm:min-w-11"
             title="Send Email"
+            aria-label="Send Email"
           >
             <Mail className="w-4 h-4" />
           </a>
@@ -65,6 +68,7 @@ export default function Footer() {
             onClick={scrollToTop}
             className="p-2.5 rounded-xl glass-panel-interactive text-slate-300 hover:text-cyan-400 border-slate-800"
             title="Scroll back to top"
+            aria-label="Scroll back to top"
           >
             <ArrowUp className="w-4 h-4" />
           </button>

@@ -1,7 +1,11 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { portfolioData } from '../../data/portfolioData';
-import profileImg from '../../assets/images/lokesh.jpeg';
+import profileImgAvif400 from '../../assets/images/lokesh-400.avif';
+import profileImgAvif800 from '../../assets/images/lokesh-800.avif';
+import profileImgWebp400 from '../../assets/images/lokesh-400.webp';
+import profileImgWebp800 from '../../assets/images/lokesh-800.webp';
+import profileImgJpeg from '../../assets/images/lokesh.jpeg';
 import FloatingSkillBadges from './FloatingSkillBadges';
 
 function FloatingProfileImage() {
@@ -22,19 +26,34 @@ function FloatingProfileImage() {
         <div className="relative rounded-3xl p-2.5 sm:p-3 bg-slate-900/60 backdrop-blur-2xl border border-slate-700/70 shadow-2xl group-hover:border-cyan-500/40 transition-colors duration-300">
 
           {/* Inner Image Container Preserving Aspect Ratio */}
-          <div className="relative rounded-2xl overflow-hidden bg-[#070c1b] border border-slate-800/90 shadow-inner">
+          <div className="relative rounded-2xl overflow-hidden bg-[#070c1b] border border-slate-800/90 shadow-inner aspect-[2/3] max-h-[460px]">
 
-            {/* Real Profile Image from src/assets/images */}
-            <img
-              src={profileImg}
-              alt={personalInfo.name}
-              loading="eager"
-              decoding="async"
-              className="w-full h-auto max-h-[460px] object-cover object-top rounded-2xl transform group-hover:scale-[1.02] transition-transform duration-500"
-            />
+            {/* High-Performance Responsive Picture with WebP/AVIF & Explicit Dimensions */}
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={`${profileImgAvif400} 400w, ${profileImgAvif800} 800w`}
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
+              />
+              <source
+                type="image/webp"
+                srcSet={`${profileImgWebp400} 400w, ${profileImgWebp800} 800w`}
+                sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
+              />
+              <img
+                src={profileImgJpeg}
+                alt={personalInfo.name}
+                width="420"
+                height="630"
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover object-top rounded-2xl transform group-hover:scale-[1.02] transition-transform duration-500"
+              />
+            </picture>
 
             {/* Subtle Gradient Overlay at Bottom of Image for Smooth Glass Integration */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070c1b] via-transparent to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070c1b] via-transparent to-transparent opacity-60 pointer-events-none" />
 
             {/* Floating Top Availability Badge inside Glass Frame */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
@@ -53,9 +72,9 @@ function FloatingProfileImage() {
             {/* Floating Bottom Name Overlay inside Glass Frame */}
             <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-slate-950/80 backdrop-blur-md border border-slate-800/90 flex items-center justify-between">
               <div>
-                <h3 className="font-display font-bold text-sm text-white leading-tight">
+                <p className="font-display font-bold text-sm text-white leading-tight">
                   {personalInfo.name}
-                </h3>
+                </p>
                 <p className="text-[10px] font-mono text-slate-400">
                   {personalInfo.role}
                 </p>

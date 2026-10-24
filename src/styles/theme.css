@@ -193,7 +193,9 @@ html[data-theme="light"] img[src$="/tools/chatgpt.svg"],
 html[data-theme="light"] img[src$="/tools/vercel.svg"],
 html[data-theme="light"] img[src$="/tools/railway.svg"],
 html[data-theme="light"] img[src$="/tools/githubcopilot.svg"],
-html[data-theme="light"] img[src$="/tools/cline.svg"] {
+html[data-theme="light"] img[src$="/tools/cline.svg"],
+html[data-theme="light"] img[src$="/tools/grok.svg"],
+html[data-theme="light"] img[src$="/tools/perplexity.svg"] {
   filter: invert(1);
 }
 

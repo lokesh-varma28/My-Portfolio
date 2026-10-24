@@ -1,7 +1,6 @@
 import { useState, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Copy, Check } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import ResumeButton from '../ResumeButton';
 import { portfolioData } from '../../data/portfolioData';
 
@@ -9,15 +8,24 @@ function HeroCTAs() {
   const [copied, setCopied] = useState(false);
   const { cta } = portfolioData.hero;
 
-  const handleCopyEmail = useCallback(() => {
-    navigator.clipboard.writeText(cta.copyEmail.email);
+  const handleCopyEmail = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(cta.copyEmail.email);
+    } catch {
+      // Fallback if clipboard API is restricted
+    }
     setCopied(true);
-    confetti({
-      particleCount: 60,
-      spread: 60,
-      origin: { y: 0.7 },
-      colors: ['#00f0ff', '#3b82f6', '#a855f7'],
-    });
+    try {
+      const { default: confetti } = await import('canvas-confetti');
+      confetti({
+        particleCount: 60,
+        spread: 60,
+        origin: { y: 0.7 },
+        colors: ['#00f0ff', '#3b82f6', '#a855f7'],
+      });
+    } catch {
+      // Non-blocking confetti
+    }
     setTimeout(() => setCopied(false), 2000);
   }, [cta.copyEmail.email]);
 
@@ -51,6 +59,7 @@ function HeroCTAs() {
         onClick={handleCopyEmail}
         className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full glass-panel border-slate-800 text-slate-400 hover:text-cyan-400 transition-colors text-xs font-mono"
         title="Copy Email to Clipboard"
+        aria-label="Copy Email Address to Clipboard"
       >
         {copied ? (
           <>

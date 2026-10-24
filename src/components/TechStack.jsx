@@ -43,7 +43,8 @@ import {
   SiNetlify,
   SiRender,
   SiRailway,
-  SiCloudflare
+  SiCloudflare,
+  SiPerplexity
 } from 'react-icons/si';
 import SpotlightCard from './SpotlightCard';
 
@@ -425,6 +426,18 @@ const SKILLS_MATRIX = [
     desc: 'Real-time reasoning, deep technical analysis, and code generation powered by Grok by xAI.'
   },
   {
+    name: 'Perplexity',
+    category: 'AI Tools',
+    level: 'Proficient',
+    icon: SiPerplexity,
+    image: '/tools/perplexity.svg',
+    url: 'https://www.perplexity.ai/',
+    color: 'text-teal-400',
+    bg: 'bg-teal-500/10',
+    border: 'border-teal-500/30',
+    desc: 'AI-powered conversational search engine with live web sources, citation-backed answers, and deep technical research.'
+  },
+  {
     name: 'Thunder Client',
     category: 'Tools',
     level: 'Proficient',
@@ -600,6 +613,7 @@ export default function TechStack() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
+              aria-pressed={isActive}
               className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
                 isActive
                   ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/20 scale-105'
@@ -644,6 +658,8 @@ export default function TechStack() {
                             <img
                               src={skill.image}
                               alt={`${skill.name} logo`}
+                              width="20"
+                              height="20"
                               className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
                               loading="lazy"
                             />
@@ -657,6 +673,8 @@ export default function TechStack() {
                             <img
                               src={skill.image}
                               alt={`${skill.name} logo`}
+                              width="20"
+                              height="20"
                               className={`w-4 h-4 sm:w-5 sm:h-5 object-contain ${['Zustand', 'Bootstrap'].includes(skill.name) ? 'brightness-125 drop-shadow-[0_1px_4px_rgba(255,255,255,0.25)]' : ''}`}
                               loading="lazy"
                             />

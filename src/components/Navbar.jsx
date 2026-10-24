@@ -18,22 +18,23 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = NAV_ITEMS.map((item) => item.href.substring(1));
-      const current = sections.find((section) => {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          return rect.top <= 200 && rect.bottom >= 200;
-        }
-        return false;
-      });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 }
+    );
 
-      if (current) setActiveSection(current);
-    };
+    NAV_ITEMS.forEach((item) => {
+      const el = document.getElementById(item.href.substring(1));
+      if (el) observer.observe(el);
+    });
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -42,6 +43,7 @@ export default function Navbar() {
         {/* Brand Monogram */}
         <a
           href="#"
+          aria-label="Natra Lokesh Portfolio Home"
           className="group flex items-center gap-3 p-1.5 rounded-xl glass-panel-interactive border-slate-800/80 hover:border-cyan-500/50 nav-surface"
         >
           <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300">

@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="en" class="dark scroll-smooth">
 
@@ -31,12 +30,14 @@
   <meta property="og:title" content="Natra Lokesh | Full Stack Software Developer" />
   <meta property="og:description"
     content="Explore Natra Lokesh's portfolio showcasing full-stack web development, React Native mobile applications, and modern software projects." />
+  <meta property="og:image" content="https://www.natralokesh.in/apple-touch-icon.png" />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Natra Lokesh | Full Stack Software Developer" />
   <meta name="twitter:description"
     content="Full Stack Software Developer specializing in web applications, mobile development, React, React Native, Node.js, and Python." />
+  <meta name="twitter:image" content="https://www.natralokesh.in/apple-touch-icon.png" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -84,12 +85,9 @@
     }
   </script>
 
-  <!-- Google Fonts: Sora & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
+  <!-- Preload Critical Above-The-Fold Local Fonts to Eliminate FOUT/FOIT -->
+  <link rel="preload" href="/fonts/sora-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Theme initialization -->
   <script>
@@ -125,4 +123,3 @@
 </body>
 
 </html>
-```

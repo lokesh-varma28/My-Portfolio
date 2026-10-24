@@ -13,7 +13,6 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
-import confetti from 'canvas-confetti';
 import SpotlightCard from './SpotlightCard';
 
 export default function Contact() {
@@ -42,15 +41,24 @@ export default function Contact() {
     return digitsOnly.length >= 7 && digitsOnly.length <= 15;
   };
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('lokeshvarmakshatriya@gmail.com');
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('lokeshvarmakshatriya@gmail.com');
+    } catch {
+      // Fallback
+    }
     setCopiedEmail(true);
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.8 },
-      colors: ['#00f0ff', '#3b82f6', '#a855f7'],
-    });
+    try {
+      const { default: confetti } = await import('canvas-confetti');
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.8 },
+        colors: ['#00f0ff', '#3b82f6', '#a855f7'],
+      });
+    } catch {
+      // Non-blocking
+    }
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
@@ -97,12 +105,17 @@ export default function Contact() {
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
 
       // Trigger celebratory confetti
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#00f0ff', '#3b82f6', '#a855f7'],
-      });
+      try {
+        const { default: confetti } = await import('canvas-confetti');
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#00f0ff', '#3b82f6', '#a855f7'],
+        });
+      } catch {
+        // Non-blocking
+      }
 
       setTimeout(() => {
         setStatus({ loading: false, success: false, error: '' });
@@ -203,6 +216,7 @@ export default function Contact() {
                   onClick={handleCopyEmail}
                   className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0 ml-2 sm:ml-0"
                   title="Copy Email"
+                  aria-label="Copy Email Address to Clipboard"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -226,9 +240,9 @@ export default function Contact() {
 
           {/* Social Links Matrix */}
           <SpotlightCard className="p-4 sm:p-6">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">
               CONNECT ON SOCIAL PLATFORMS
-            </h4>
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href="https://github.com/lokesh-varma28"

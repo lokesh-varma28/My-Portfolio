@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Search, ArrowUpRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
@@ -6,82 +6,148 @@ import SpotlightCard from '../SpotlightCard';
 import RepositoryCard from './RepositoryCard';
 import { githubReposData } from '../../data/githubReposData';
 
+const CACHE_KEY = 'github_repos_cache_v1';
+const CACHE_TIME_KEY = 'github_repos_cache_time_v1';
+const CACHE_TTL = 1000 * 60 * 60 * 2; // 2 hours
+
 export default function GithubRepos() {
-  // 1. Render real fallback repositories immediately without waiting for API
-  const [repos, setRepos] = useState(githubReposData.repositories);
+  const sectionRef = useRef(null);
+
+  // 1. Render from persistent cache or fallback immediately without waiting for API
+  const [repos, setRepos] = useState(() => {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {
+      // Storage unavailable or invalid JSON
+    }
+    return githubReposData.repositories;
+  });
+
   const [loading, setLoading] = useState(false);
-  const [isSynced, setIsSynced] = useState(false);
+  const [isSynced, setIsSynced] = useState(() => {
+    try {
+      const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+      if (cachedTime && Date.now() - Number(cachedTime) < CACHE_TTL) {
+        return true;
+      }
+    } catch {
+      // Ignore
+    }
+    return false;
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  // 3. Start background sync after component mounts
-  useEffect(() => {
-    let isMounted = true;
+  const fetchGithubRepos = useCallback(async (force = false) => {
+    if (!force) {
+      try {
+        const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+        if (cachedTime && Date.now() - Number(cachedTime) < CACHE_TTL) {
+          setIsSynced(true);
+          return;
+        }
+      } catch {
+        // Continue to fetch
+      }
+    }
+
+    setLoading(true);
     const abortController = new AbortController();
     const timeoutId = setTimeout(() => abortController.abort(), 6000);
 
-    const fetchGithubRepos = async () => {
-      setLoading(true);
+    try {
+      const response = await fetch(githubReposData.apiUrl, {
+        signal: abortController.signal,
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
 
-      try {
-        const response = await fetch(githubReposData.apiUrl, {
-          signal: abortController.signal,
-          headers: {
-            Accept: 'application/vnd.github.v3+json',
-          },
-        });
+      clearTimeout(timeoutId);
 
-        clearTimeout(timeoutId);
+      if (!response.ok) {
+        throw new Error(`GitHub API status ${response.status}`);
+      }
 
-        if (!response.ok) {
-          throw new Error(`GitHub API status ${response.status}`);
-        }
+      const data = await response.json();
 
-        const data = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
+        const mapped = data.map((r) => ({
+          id: r.id,
+          name: r.name,
+          displayName: r.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
+          description: r.description || 'Public GitHub repository.',
+          html_url: r.html_url,
+          language: r.language || 'JavaScript',
+          stargazers_count: r.stargazers_count,
+          forks_count: r.forks_count,
+          updated_at: r.updated_at,
+          topics: r.topics || [],
+        }));
 
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          const mapped = data.map((r) => ({
-            id: r.id,
-            name: r.name,
-            displayName: r.name.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
-            description: r.description || 'Public GitHub repository.',
-            html_url: r.html_url,
-            language: r.language || 'JavaScript',
-            stargazers_count: r.stargazers_count,
-            forks_count: r.forks_count,
-            updated_at: r.updated_at,
-            topics: r.topics || [],
-          }));
-          // Update with live data on background sync success
-          setRepos(mapped);
-          setIsSynced(true);
-        }
-      } catch (err) {
-        if (err.name === 'AbortError') {
-          console.warn('GitHub API background sync timed out or aborted.');
-        } else {
-          console.warn('GitHub API background sync warning:', err);
-        }
-        // Silently keep existing fallback repositories; do not clear state or show error banner
-      } finally {
-        clearTimeout(timeoutId);
-        if (isMounted) {
-          setLoading(false);
+        setRepos(mapped);
+        setIsSynced(true);
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(mapped));
+          localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
+        } catch {
+          // LocalStorage full or blocked
         }
       }
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        console.warn('GitHub API background sync timed out or aborted.');
+      } else {
+        console.warn('GitHub API background sync warning:', err);
+      }
+    } finally {
+      clearTimeout(timeoutId);
+      setLoading(false);
+    }
+  }, []);
+
+  // 2. Start background sync only when approaching viewport or on idle, avoiding critical chain
+  useEffect(() => {
+    let isMounted = true;
+    let didTrigger = false;
+
+    const triggerSync = () => {
+      if (didTrigger || !isMounted) return;
+      didTrigger = true;
+      fetchGithubRepos(false);
     };
 
-    fetchGithubRepos();
-    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          triggerSync();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    // Idle fallback after 4 seconds
+    const timeout = setTimeout(triggerSync, 4000);
+
     return () => {
       isMounted = false;
-      abortController.abort();
+      observer.disconnect();
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [fetchGithubRepos]);
 
   const handleRefresh = useCallback(() => {
-    window.location.reload();
-  }, []);
+    fetchGithubRepos(true);
+  }, [fetchGithubRepos]);
 
   const languages = ['All', ...new Set(repos.map((r) => r.language).filter(Boolean))];
 
@@ -95,7 +161,11 @@ export default function GithubRepos() {
   });
 
   return (
-    <section id="projects" className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="scroll-mt-20 sm:scroll-mt-0 py-12 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10 scroll-mt-28 sm:scroll-mt-28"
+    >
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
         <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
@@ -143,7 +213,8 @@ export default function GithubRepos() {
             <button
               onClick={handleRefresh}
               disabled={loading}
-              className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-colors disabled:opacity-50"
+              aria-label="Synchronize repositories from GitHub API"
+              className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-colors disabled:opacity-50 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>{loading ? 'Syncing...' : 'Sync Repos'}</span>
@@ -153,6 +224,7 @@ export default function GithubRepos() {
               href={githubReposData.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="View Natra Lokesh GitHub profile in new tab"
               className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-xs font-semibold shadow-lg hover:scale-105 transition-all"
             >
               <span>GitHub Profile</span>
@@ -170,15 +242,17 @@ export default function GithubRepos() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search repository by name or tag..."
+              aria-label="Search repositories by name or tag"
               className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
             />
           </div>
 
-          <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
+          <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0" role="group" aria-label="Filter repositories by language">
             {languages.map((lang) => (
               <button
                 key={lang}
                 onClick={() => setActiveFilter(lang)}
+                aria-pressed={activeFilter === lang}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors shrink-0 ${
                   activeFilter === lang
                     ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
@@ -213,5 +287,3 @@ export default function GithubRepos() {
     </section>
   );
 }
-
-
